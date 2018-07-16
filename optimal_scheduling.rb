@@ -2,6 +2,7 @@
 # Write an algorithmn that finds a way to fit in the most jobs based on these intervals
 # This problem was inspired by The Algorithmn and Design Manual
 
+# A vertex class is used to keep track of sets, and any overlap. Edges are handled inside the Vertex class, rather than as a seperate set
 class Vertex
   attr_reader :start, :end
   attr_accessor :connections
@@ -23,6 +24,8 @@ def optimal_scheduling(array)
   jobs = []
   until sets.empty?
     set = find_earliest_completion_date(sets)
+    # Find the set that completes the earliest, then delete it, as well as
+    # any other sets connected to it from the remaining sets.
     jobs.push([set.start, set.end])
     connections = set.connections
     connections.each do |vertex|
