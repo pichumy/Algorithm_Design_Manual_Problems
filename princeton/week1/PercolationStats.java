@@ -10,7 +10,7 @@ public class PercolationStats {
       throw new IllegalArgumentException("n and trials must be greater than 0");
     }
     results = new double[trials];
-    runTrials(size, trials);
+    runTrials(n, trials);
   }
 
   private void runTrials(int size, int trials) {
