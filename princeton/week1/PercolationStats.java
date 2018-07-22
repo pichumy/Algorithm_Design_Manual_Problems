@@ -27,7 +27,7 @@ public class PercolationStats {
     }
     return spacesUsed / (size * size);
   }
-  // Tried moving the random function out in order to reduce API calls
+
   private void openRandomBlock(int size, Percolation board) {
     boolean isOpen = true;
     int row = 0;
