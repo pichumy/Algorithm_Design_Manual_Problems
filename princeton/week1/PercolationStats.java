@@ -22,14 +22,26 @@ public class PercolationStats {
     Percolation board = new Percolation(size);
     double spacesUsed = 0;
     while (!board.percolates()) {
-      int row = StdRandom.uniform(1, size);
-      int col = StdRandom.uniform(1, size);
-      if (!board.isOpen(row, col)) {
-        board.open(row, col);
-        spacesUsed++;
-      }
+      openRandomBlock(size, board);
+      spacesUsed += 1;
     }
     return spacesUsed / (size * size);
+  }
+  // Tried moving the random function out in order to reduce API calls
+  private void openRandomBlock(int size, Percolation board) {
+    boolean isOpen = true;
+    int row = 0;
+    int col = 0;
+    while(isOpen) {
+      row = random(size);
+      col = random(size);
+      isOpen = board.isOpen(row, col);
+    }
+    board.open(row, col);
+  }
+
+  private int random(int size){
+    return StdRandom.uniform(1, size + 1);
   }
   // sample mean of percolation threshold
   public double mean() {
