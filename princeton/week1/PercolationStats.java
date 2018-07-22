@@ -7,7 +7,7 @@ public class PercolationStats {
   // perform trials independent experiments on an n x n grid
   public PercolationStats(int n, int trials){
     if(n <= 0 || trials <= 0){
-      throw IllegalArgumentException("n and trials must be greater than 0");
+      throw new IllegalArgumentException("n and trials must be greater than 0");
     }
     results = new double[trials];
   }
@@ -23,7 +23,7 @@ public class PercolationStats {
     double spacesUsed = 0;
     while(!board.percolates()){
       int row = StdRandom.uniform(1, size + 1);
-      int col = StdRandom.unfirom(1, size + 1);
+      int col = StdRandom.uniform(1, size + 1);
       if(!board.isOpen(row, col)){
         board.open(row, col);
         spacesUsed++;
@@ -55,6 +55,6 @@ public class PercolationStats {
     PercolationStats stats = new PercolationStats(Integer.parseInt(args[0]), Integer.parseInt(args[1]));
     System.out.println("mean =                     " + stats.mean());
     System.out.println("stddev =                   " + stats.stddev());
-    System.out.println("95% confidence interval = [" + stats.confidenceLo + ", " + stats.confidenceHi());
+    System.out.println("95% confidence interval = [" + stats.confidenceLo() + ", " + stats.confidenceHi());
   }
 }
