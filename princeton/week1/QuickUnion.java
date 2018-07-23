@@ -1,3 +1,4 @@
+// NOTE: These files are more for notes rather than compilation. You would need to move the WeightedQuickUnion code to a seperate file in order to use it. 
 // If the trees dont get too tall (such as a node being linked to another node in a line), then this
 // works pretty well actually, but the worst case scenario (nodes linked in a line) gives you really bad runtime
 public class QuickUnion{
