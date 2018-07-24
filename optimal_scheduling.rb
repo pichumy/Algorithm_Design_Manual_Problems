@@ -16,7 +16,6 @@ class Vertex
     @connections.push(vertex2)
     vertex2.connections.push(self)
   end
-
 end
 
 def optimal_scheduling(array)
@@ -46,6 +45,7 @@ def find_earliest_completion_date(sets)
   sets[minimum]
 end
 
+# Worst Case, O(n^2)
 def combine_overlapping_sets(array)
   vertexes = []
   array.each do |set|
