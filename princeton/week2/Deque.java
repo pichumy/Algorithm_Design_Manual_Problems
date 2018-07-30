@@ -31,13 +31,16 @@ public class Deque<Item> implements Iterable<Item> {
       if (item == null) {
         throw new IllegalArgumentException("Null is not a valid item");
       }
-      Node oldfirst = first;
       Node newfirst = new Node();
       newfirst.item = item;
-      newfirst.next = oldfirst;
-      newfirst.prev = null;
-      oldfirst.prev = newfirst;
-      first = newfirst;
+      if(size() == 0){
+        first = newfirst;
+        last = newfirst;
+      }else{
+          first.prev = newfirst;
+          newfirst.next = first;
+          first = newfirst;
+      }
       length++;
     }
     // Add item to the end
@@ -45,13 +48,16 @@ public class Deque<Item> implements Iterable<Item> {
       if (item == null) {
         throw new IllegalArgumentException("Null is not a valid item");
       }
-      Node oldlast = last;
       Node newlast = new Node();
-      newlast.item = item;
-      oldlast.next = newlast;
-      newlast.next = null;
-      newlast.prev = oldlast;
-      last = newlast;
+      newlast.item = item; 
+      if(size() == 0){
+        first = newlast;
+        last = newlast;
+      } else{
+        last.next = newlast;
+        newlast.prev = last;
+        last = newlast;
+      }
       length++;
     }
     // remove from front and return item
@@ -59,26 +65,37 @@ public class Deque<Item> implements Iterable<Item> {
       if(isEmpty()){
         throw new NoSuchElementException();
       }
-      Node oldfirst = first;
-      Node newfirst = first.next;
-      oldfirst.next = null;
-      newfirst.prev = null;
-      first = newfirst;
+      Item value = first.item;
+      if(first == last){
+        first = null;
+        last = null;
+      }else {
+        Node newfirst = first.next;
+        newfirst.prev = null;
+        first.next = null;
+        first = newfirst;
+      }
       length--;
-      return oldfirst.item;
+      return value;
     }
     // remove from end and return item
     public Item removeLast() {
       if(isEmpty()){
         throw new NoSuchElementException();
       }
-      Node oldlast = last;
-      Node newlast = last.prev;
-      newlast.next = null;
-      last = newlast;
-      oldlast.prev = null;
+      Item value = last.item;
+      if(first == last){
+        first = null;
+        last = null;
+      } else {
+        Node oldlast = last;
+        last = oldlast.prev;
+        last.next = null;
+        oldlast.prev = null;
+        oldlast = null;
+      }
       length--;
-      return oldlast.item;
+      return value;
     }
 
     // return an interator over items in order from front to end
